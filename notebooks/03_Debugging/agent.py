@@ -91,10 +91,11 @@ class Agent:
 
         try:
             result = search.invoke({"query": query})
-            return str(result)
+            return result
 
         except Exception as e:
-            return f"Web search failed: {str(e)}"
+            return {"error": f"Web search failed: {str(e)}"}
+
  
     def binding_tools(self, llm, tools: list):
         """
