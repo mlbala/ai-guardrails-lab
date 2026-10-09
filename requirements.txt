@@ -7,3 +7,4 @@ python-dotenv
 langgraph
 langsmith
 langchain_tavily
+langgraph-cli[inmem]
