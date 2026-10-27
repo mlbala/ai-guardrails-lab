@@ -10,3 +10,4 @@ langchain_tavily
 langgraph-cli[inmem]
 langchain-mcp-adapters
 mcp
+-e .
