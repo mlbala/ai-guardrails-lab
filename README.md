@@ -22,6 +22,66 @@ Learn to build safer, more reliable AI applications through practical guardrail 
 - Familiarity with LLM and Generative AI concepts
 - API keys or cloud access for relevant examples
 
+## Repository Structure
+
+```text
+ai-guardrails-lab/
+├── modules/                       # Course lessons, one folder per module
+│   ├── 01_foundations/            # LangChain, LangGraph, debugging, multi-agent, MCP
+│   ├── 02_guardrails/             # NeMo Guardrails, Bedrock Guardrails, Guardrails AI
+│   ├── 03_observability/          # LangSmith, Pydantic Logfire
+│   ├── 04_llm_gateways/           # Portkey, TensorZero, Redis caching and rate limiting
+│   ├── 05_evaluations/            # DeepEval
+│   ├── 06_red_teaming/            # PyRIT
+│   └── 07_deep_agents/            # Deep agents, Claude Code workflows
+├── projects/                      # End-to-end projects that combine the modules
+│   ├── _template/                 # Copy this to start a new project
+│   ├── 01_secure_support_agent/
+│   ├── 02_enterprise_llm_gateway/
+│   └── 03_red_teaming_eval_suite/
+├── src/guardrails_lab/            # Shared helpers, installed as an editable package
+│   ├── config.py                  # Repo paths, .env loading, setup_notebook()
+│   ├── llm_factory.py             # get_chat_model("provider:model")
+│   ├── observability.py           # enable_langsmith()
+│   ├── validators/                # Reusable guardrail validators
+│   └── utils/
+├── configs/                       # Guardrail, gateway and evaluation configs
+├── data/                          # Datasets and sample inputs
+├── tests/                         # pytest tests for src/guardrails_lab
+├── .env.example                   # Template for the API keys
+├── pyproject.toml
+└── requirements.txt
+```
+
+Each module and project folder has its own README with what it covers and how to run it.
+
+## Getting Started
+
+Requires Python 3.14+ and [uv](https://docs.astral.sh/uv/).
+
+```bash
+uv sync                # creates .venv, installs the dependencies and guardrails_lab (editable)
+cp .env.example .env   # then fill in your API keys
+```
+
+Using pip instead: `pip install -r requirements.txt` (the last line, `-e .`, installs `guardrails_lab`).
+
+Every notebook starts with:
+
+```python
+from guardrails_lab.config import setup_notebook
+
+ROOT_DIR, DATA_DIR = setup_notebook(required_env=["OPENAI_API_KEY"])
+```
+
+It makes the repo root the working directory, loads `.env`, and stops with a clear error if a listed key is missing.
+
+## Running Tests
+
+```bash
+uv run pytest
+```
+
 ## Status
 
 Work in progress — examples and learning notes are added as I progress through the course.
