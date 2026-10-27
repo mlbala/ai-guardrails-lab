@@ -21,6 +21,16 @@ cp .env.example .env   # then fill in the keys
 
 Keys used in this module: `OPENAI_API_KEY`, `GROQ_API_KEY`, `GOOGLE_API_KEY`, `TAVILY_API_KEY`, `LANGSMITH_API_KEY`.
 
+Every notebook starts with:
+
+```python
+from guardrails_lab.config import setup_notebook
+
+ROOT_DIR, DATA_DIR = setup_notebook(required_env=["OPENAI_API_KEY"])
+```
+
+It makes the repo root the working directory, loads `.env`, and stops with a clear error if a listed key is missing. Relative paths in notebooks therefore start from the repo root.
+
 ## Running the scripts
 
 ```bash
