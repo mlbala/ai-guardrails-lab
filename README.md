@@ -39,7 +39,7 @@ ai-guardrails-lab/
 │   ├── 01_secure_support_agent/
 │   ├── 02_enterprise_llm_gateway/
 │   └── 03_red_teaming_eval_suite/
-├── src/guardrails_lab/            # Shared helpers, installed as an editable package
+├── src/guardkit/                  # Shared helpers, installed as an editable package
 │   ├── config.py                  # Repo paths, .env loading, setup_notebook()
 │   ├── llm_factory.py             # get_chat_model("provider:model")
 │   ├── observability.py           # enable_langsmith()
@@ -47,7 +47,7 @@ ai-guardrails-lab/
 │   └── utils/
 ├── configs/                       # Guardrail, gateway and evaluation configs
 ├── data/                          # Datasets and sample inputs
-├── tests/                         # pytest tests for src/guardrails_lab
+├── tests/                         # pytest tests for src/guardkit
 ├── .env.example                   # Template for the API keys
 ├── pyproject.toml
 └── requirements.txt
@@ -60,16 +60,16 @@ Each module and project folder has its own README with what it covers and how to
 Requires Python 3.14+ and [uv](https://docs.astral.sh/uv/).
 
 ```bash
-uv sync                # creates .venv, installs the dependencies and guardrails_lab (editable)
+uv sync                # creates .venv, installs the dependencies and guardkit (editable)
 cp .env.example .env   # then fill in your API keys
 ```
 
-Using pip instead: `pip install -r requirements.txt` (the last line, `-e .`, installs `guardrails_lab`).
+Using pip instead: `pip install -r requirements.txt` (the last line, `-e .`, installs `guardkit`).
 
 Every notebook starts with:
 
 ```python
-from guardrails_lab.config import setup_notebook
+from guardkit.config import setup_notebook
 
 ROOT_DIR, DATA_DIR = setup_notebook(required_env=["OPENAI_API_KEY"])
 ```

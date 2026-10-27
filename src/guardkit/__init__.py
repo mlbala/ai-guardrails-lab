@@ -1,6 +1,6 @@
 """Shared helpers for the AI Guardrails Lab modules and projects."""
 
-from guardrails_lab.config import (
+from guardkit.config import (
     CONFIGS_DIR,
     DATA_DIR,
     REPO_ROOT,
@@ -10,8 +10,8 @@ from guardrails_lab.config import (
     set_root_dir,
     setup_notebook,
 )
-from guardrails_lab.llm_factory import get_chat_model
-from guardrails_lab.observability import enable_langsmith
+from guardkit.llm_factory import get_chat_model
+from guardkit.observability import enable_langsmith
 
 __all__ = [
     "CONFIGS_DIR",

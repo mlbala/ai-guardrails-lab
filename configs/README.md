@@ -5,7 +5,7 @@ Configuration files for guardrails, gateways and evaluations, for example NeMo G
 Load them from code with:
 
 ```python
-from guardrails_lab.config import CONFIGS_DIR
+from guardkit.config import CONFIGS_DIR
 ```
 
 No secrets here: API keys belong in the repo `.env` (see `.env.example`).

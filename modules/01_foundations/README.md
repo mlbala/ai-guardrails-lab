@@ -15,7 +15,7 @@ LangChain and LangGraph agent basics that the guardrail modules build on.
 From the repo root:
 
 ```bash
-uv sync                # installs the dependencies and guardrails_lab (editable)
+uv sync                # installs the dependencies and guardkit (editable)
 cp .env.example .env   # then fill in the keys
 ```
 
@@ -24,7 +24,7 @@ Keys used in this module: `OPENAI_API_KEY`, `GROQ_API_KEY`, `GOOGLE_API_KEY`, `T
 Every notebook starts with:
 
 ```python
-from guardrails_lab.config import setup_notebook
+from guardkit.config import setup_notebook
 
 ROOT_DIR, DATA_DIR = setup_notebook(required_env=["OPENAI_API_KEY"])
 ```

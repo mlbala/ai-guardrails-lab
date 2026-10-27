@@ -2,7 +2,7 @@
 
 import os
 
-from guardrails_lab.config import load_env
+from guardkit.config import load_env
 
 
 def enable_langsmith(project: str | None = None) -> bool:

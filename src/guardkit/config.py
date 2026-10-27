@@ -6,7 +6,7 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-# src/guardrails_lab/config.py -> repo root (the package is installed editable with `-e .`)
+# src/guardkit/config.py -> repo root (the package is installed editable with `-e .`)
 REPO_ROOT = Path(__file__).resolve().parents[2]
 CONFIGS_DIR = REPO_ROOT / "configs"
 DATA_DIR = REPO_ROOT / "data"
@@ -48,14 +48,14 @@ def load_env(
 
 def _find_root_dir() -> Path:
     """Return the nearest folder at or above the working directory that holds pyproject.toml
-    and src/guardrails_lab, or REPO_ROOT when working outside the repo."""
+    and src/guardkit, or REPO_ROOT when working outside the repo."""
     cwd = Path.cwd().resolve()
     for folder in (cwd, *cwd.parents):
-        if (folder / "pyproject.toml").is_file() and (folder / "src" / "guardrails_lab").is_dir():
+        if (folder / "pyproject.toml").is_file() and (folder / "src" / "guardkit").is_dir():
             return folder
     if (REPO_ROOT / "pyproject.toml").is_file():
         return REPO_ROOT
-    raise FileNotFoundError(f"No repo root (pyproject.toml + src/guardrails_lab) found at or above {cwd}")
+    raise FileNotFoundError(f"No repo root (pyproject.toml + src/guardkit) found at or above {cwd}")
 
 
 def set_root_dir(chdir: bool = True) -> Path:

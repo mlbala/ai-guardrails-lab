@@ -1,7 +1,7 @@
 import pytest
 from langchain_openai import ChatOpenAI
 
-from guardrails_lab.llm_factory import get_chat_model
+from guardkit.llm_factory import get_chat_model
 
 
 @pytest.mark.parametrize("spec", ["gpt-5-mini", "openai:", ":gpt-5-mini", ""])

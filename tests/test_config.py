@@ -3,8 +3,8 @@ from pathlib import Path
 
 import pytest
 
-import guardrails_lab
-from guardrails_lab.config import (
+import guardkit
+from guardkit.config import (
     CONFIGS_DIR,
     DATA_DIR,
     REPO_ROOT,
@@ -15,7 +15,7 @@ from guardrails_lab.config import (
     setup_notebook,
 )
 
-TEST_KEY = "GUARDRAILS_LAB_TEST_KEY"
+TEST_KEY = "GUARDKIT_TEST_KEY"
 
 
 @pytest.fixture
@@ -30,9 +30,9 @@ def env_file(tmp_path, monkeypatch):
 
 @pytest.fixture
 def fake_repo(tmp_path, monkeypatch):
-    """A minimal repo (pyproject.toml, src/guardrails_lab, .env) used as the working directory."""
+    """A minimal repo (pyproject.toml, src/guardkit, .env) used as the working directory."""
     root = (tmp_path / "repo").resolve()
-    (root / "src" / "guardrails_lab").mkdir(parents=True)
+    (root / "src" / "guardkit").mkdir(parents=True)
     (root / "pyproject.toml").write_text("[project]\nname = 'fake-repo'\n")
     (root / ".env").write_text(f"{TEST_KEY}=from-fake-repo\n")
     # monkeypatch.chdir also restores the original working directory after the test
@@ -53,7 +53,7 @@ def lesson_dir(fake_repo, monkeypatch):
 
 def test_repo_root_holds_the_project():
     assert (REPO_ROOT / "pyproject.toml").is_file()
-    assert (REPO_ROOT / "src" / "guardrails_lab").is_dir()
+    assert (REPO_ROOT / "src" / "guardkit").is_dir()
     assert CONFIGS_DIR == REPO_ROOT / "configs"
     assert DATA_DIR == REPO_ROOT / "data"
 
@@ -73,8 +73,8 @@ def test_load_env_keeps_existing_values_unless_override(env_file, monkeypatch):
 
 
 def test_load_env_raises_for_missing_keys(env_file):
-    with pytest.raises(MissingEnvError, match="GUARDRAILS_LAB_NOT_SET"):
-        load_env(required=[TEST_KEY, "GUARDRAILS_LAB_NOT_SET"], env_file=env_file)
+    with pytest.raises(MissingEnvError, match="GUARDKIT_NOT_SET"):
+        load_env(required=[TEST_KEY, "GUARDKIT_NOT_SET"], env_file=env_file)
 
 
 def test_load_env_without_env_file_returns_false(tmp_path):
@@ -126,11 +126,11 @@ def test_setup_notebook_without_chdir_keeps_working_directory(fake_repo, lesson_
 
 
 def test_setup_notebook_raises_for_missing_keys(fake_repo, lesson_dir):
-    with pytest.raises(MissingEnvError, match="GUARDRAILS_LAB_NOT_SET"):
-        setup_notebook(required_env=[TEST_KEY, "GUARDRAILS_LAB_NOT_SET"])
+    with pytest.raises(MissingEnvError, match="GUARDKIT_NOT_SET"):
+        setup_notebook(required_env=[TEST_KEY, "GUARDKIT_NOT_SET"])
 
 
 def test_helpers_are_exported_from_the_package():
-    assert guardrails_lab.set_root_dir is set_root_dir
-    assert guardrails_lab.get_data_dir is get_data_dir
-    assert guardrails_lab.setup_notebook is setup_notebook
+    assert guardkit.set_root_dir is set_root_dir
+    assert guardkit.get_data_dir is get_data_dir
+    assert guardkit.setup_notebook is setup_notebook
