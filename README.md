@@ -66,6 +66,10 @@ cp .env.example .env   # then fill in your API keys
 
 Using pip instead: `pip install -r requirements.txt` (the last line, `-e .`, installs `guardkit`).
 
+## Using guardkit
+
+`guardkit` is the shared package in `src/guardkit/`. Import it as `guardkit` (not `src.guardkit`); it works from any folder once installed.
+
 Every notebook starts with:
 
 ```python
@@ -76,6 +80,16 @@ ROOT_DIR, DATA_DIR = setup_notebook(required_env=["OPENAI_API_KEY"])
 
 It makes the repo root the working directory, loads `.env`, and stops with a clear error if a listed key is missing.
 
+Other helpers, for example in a script:
+
+```python
+from guardkit import enable_langsmith, get_chat_model, load_env
+
+load_env(required=["OPENAI_API_KEY"])      # load .env (setup_notebook already does this in notebooks)
+model = get_chat_model("openai:gpt-5-mini")  # any "provider:model", e.g. "groq:qwen/qwen3.8-27b"
+enable_langsmith()                          # turns on LangSmith tracing if LANGSMITH_API_KEY is set
+```
+
 ## Running Tests
 
 ```bash
@@ -85,3 +99,15 @@ uv run pytest
 ## Status
 
 Work in progress — examples and learning notes are added as I progress through the course.
+
+| Module | Topic | Status |
+| --- | --- | --- |
+| 01 | Foundations: LangChain, LangGraph, debugging, multi-agent, MCP | ✅ Done (16 notebooks, 5 scripts) |
+| 02 | Guardrails | Not started |
+| 03 | Observability | Not started |
+| 04 | LLM gateways | Not started |
+| 05 | Evaluations | Not started |
+| 06 | Red teaming | Not started |
+| 07 | Deep agents | Not started |
+
+Projects (`projects/01`–`03`) start once the matching modules are done.
